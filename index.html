@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KyroMc | Official Website</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+    scroll-behavior:smooth;
+}
+
+body{
+    background: linear-gradient(-45deg, #140019, #1e0033, #240046, #0d1b4c);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+    color:white;
+    overflow-x:hidden;
+    word-wrap: break-word;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(106, 0, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(106, 0, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+    pointer-events: none;
+     font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+@keyframes gradientMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #e0aaff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #6a00ff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9998;
+    pointer-events: none;
+}
+
+
+@media (hover: none) and (pointer: coarse) {
+    .cursor-dot,
+    .cursor-outline {
+        display: none;
+    }
+}
+
+
+
+.floating, .floating2{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(90px);
+    opacity:0.35;
+    z-index:-1;
+}
+
+.floating{
+    width:400px;
+    height:400px;
+    background:#6a00ff;
+    top:10%;
+    left:5%;
+    animation:float1 10s ease-in-out infinite;
+}
+
+.floating2{
+    width:350px;
+    height:350px;
+    background:#3a86ff;
+    bottom:10%;
+    right:10%;
+    animation:float2 12s ease-in-out infinite;
+}
+
+@keyframes float1{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(50px);} }
+@keyframes float2{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-50px);} }
+
+
+
+.hero{
+    height:90vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    top: 150px;
+    padding:20px;
+    text-align:center;
+}
+
+.name{
+    font-size: clamp(40px, 10vw, 90px);
+    font-weight:bold;
+    transform:translateX(100%);
+    animation: slideIn 2.5s forwards, neonPulse 3s infinite 2.5s ease-in-out;
+    letter-spacing:4px;
+    background: linear-gradient(to right, #ffffff, #b388ff, #3a86ff, #ffffff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes slideIn{
+    0%{transform:translateX(100%); opacity: 0;}
+    70%{transform:translateX(0); opacity: 1;}
+    100%{transform:translateX(0); opacity: 1;}
+}
+
+@keyframes neonPulse {
+    0%, 100% { filter: drop-shadow(0 0 10px rgba(106, 0, 255, 0.5)); }
+    50% { filter: drop-shadow(0 0 30px rgba(106, 0, 255, 0.9)); }
+}
+
+.subtitle {
+    margin-top: 10px;
+    font-size: clamp(14px, 4vw, 22px);
+    color: #cdb4ff;
+    text-align: center;
+    padding: 0 15px;
+}
+
+
+.box{
+    width:90%;
+    max-width:800px;
+    margin:80px auto;
+    padding:40px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,0.1);
+    text-align:center;
+    opacity:0;
+    transform:translateY(60px);
+    transition:0.6s ease;
+}
+
+.box.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.box h2{
+    margin-bottom:20px;
+    font-size:28px;
+    color:#b388ff;
+}
+
+.box:hover{
+    transform:translateY(0) scale(1.02);
+    border:1px solid #6a00ff;
+    box-shadow:0 0 35px rgba(106,0,255,0.4);
+}
+
+.skill-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.skill-tag {
+    background: rgba(106, 0, 255, 0.1);
+    border: 1px solid rgba(106, 0, 255, 0.3);
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 14px;
+    color: #e0aaff;
+    transition: 0.3s;
+}
+
+.skill-tag:hover {
+    background: #6a00ff;
+    color: white;
+}
+
+
+.icons{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    font-size:32px;
+    flex-wrap: wrap;
+}
+
+.icons a, .icons i{
+    color:#e0aaff;
+    transition:0.3s;
+    text-decoration: none;
+    cursor:pointer;
+}
+
+.icons a:hover, .icons i:hover{
+    transform:scale(1.2);
+    color:#3a86ff;
+}
+.box1{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    image-orientation: from-image;
+    padding:30px 0;
+}
+
+.popup{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+    justify-content:center;
+    align-items:center;
+    z-index: 10000;
+}
+
+.popup-content{
+    background:#1e0033;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+    width:90%;
+    max-width:320px;
+    border:1px solid #6a00ff;
+}
+
+.close{
+    margin-top:15px;
+    color:#ff4d6d;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+@media (max-width:768px){
+
+    .hero{
+        height:80vh;
+    }
+
+    .box{
+        padding:25px;
+        margin:50px auto;
+    }
+
+    .skill-tag{
+        font-size:12px;
+        padding:6px 14px;
+    }
+
+    .floating,
+    .floating2{
+        width:200px;
+        height:200px;
+        filter:blur(60px);
+        animation:none;
+        opacity:0.2;
+    }
+}
+
+footer{
+    text-align:center;
+    padding:30px 0;
+    opacity:0.6;
+}
+.staff-btn {
+    background: transparent;   /* removes white */
+    border: 2px solid #00ffff;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.staff-btn:hover {
+    background: #00ffff;
+    color: black;
+}
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: #111;
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    animation: pop 0.3s ease;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+@keyframes pop {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+.close{
+    position:relative;
+   
+    right: 5px;
+   font-size: 20px;
+    cursor: pointer;
+}
+</style>
+</head>
+<div class="box1">
+    <img class="gg" src="C:\\Users\\acer\\Downloads\\kyro.jpg" alt="KyroMc Logo" style="width: auto; height: 150px; border-radius: 15px; border: 2px solid #6a00ff; box-shadow: 0 0 20px rgba(106, 0, 255, 0.5); top:5px 
+    left: 5px; animation: float1 3s ease-in-out infinite;">
+</div>
+<body>
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
+<div class="floating"></div>
+<div class="floating2"></div>
+
+<section class="hero">
+    <div class="name">KyroMc </div>
+    <div class="subtitle">Practice • Survival • Lifesteal</div>
+</section>
+<div class="box reveal">
+    <h2>Join The Kyro Mc</h2>
+    <p> IP: play.kyromc.fun</p>
+    <p> Port: 15065 </p>
+    <h3>• Support: Java & Bedrock</h3>
+    <h3>• Version: Latest Supported</h3>
+    <h3>• Account: Cracked & Premium Support</h3>
+</div>
+<div class="box reveal">
+    <h2>Introduction</h2>
+    <p> KyroMC is a multiplayer server in Minecraft where players can join online and play different game modes with others around the world.</p>
+    <p style="margin:15px 0; opacity:0.3;">-------------------------</p>
+    <p>It supports both Java Edition and Bedrock Edition (MCPE), so players on PC, mobile, consoles, and Windows 10/11 can all connect!</p>
+</div>
+
+<div class="box reveal">
+    <h2>Game Modes</h2>
+        <span class="skill-tag">Practice</span>
+        <span class="skill-tag">Survival</span>
+        <span class="skill-tag">Lifesteal</span>
+</div>
+<div class="box reveal">
+    <h2>STAFFS</h2>
+    <div class="skill-container">
+        <button class="staff-btn" onclick="openPopup('OWNERS')">OWNERS</button>
+        <button class="staff-btn" onclick="openPopup('MODERATORS')">MODERATORS</button>
+        <button class="staff-btn" onclick="openPopup('DEVELOPERS')">DEVELOPERS</button>
+        <button class="staff-btn" onclick="openPopup('ADMINS')">ADMINS</button>
+        <button class="staff-btn" onclick="openPopup('HELPERS')">HELPERS</button>
+        <button class="staff-btn" onclick="openPopup('MANAGERS')">MANAGERS</button>
+    </div>
+</div>
+
+
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()"> ✖</span>
+        <h3 id="popup-title"></h3>
+        <p id="popup-text"></p>
+    </div>
+</div>
+
+
+<div class="box reveal">
+    <h2>Connect</h2>
+    <div class="icons">
+        
+        <a href="https://discord.gg/qN2gBHY9" target="_blank"><i class="fab fa-discord"></i></a>
+       <a href="https://store.kyromc.fun" target="_blank"><i class="fa fa-shopping-cart"></i></a>
+        <a href="https://www.youtube.com/@kyromc-15065" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://tierlist.kyromc.fun" target="_blank"><i class="fab fa-chrome"></i></a>
+    </div>
+</div>
+
+
+<footer>Made with 💕 | KyroMc</footer>
+
+<script>
+
+const cursorDot = document.querySelector(".cursor-dot");
+const cursorOutline = document.querySelector(".cursor-outline");
+
+if (window.matchMedia("(hover: hover)").matches) {
+    window.addEventListener("mousemove", (e) => {
+        const posX = e.clientX;
+        const posY = e.clientY;
+        cursorDot.style.left = `${posX}px`;
+        cursorDot.style.top = `${posY}px`;
+        cursorOutline.animate(
+            { left: `${posX}px`, top: `${posY}px` },
+            { duration: 500, fill: "forwards" }
+        );
+    });
+}
+
+window.addEventListener("scroll", function(){
+    let reveals = document.querySelectorAll(".reveal");
+    reveals.forEach(el => {
+        if(el.getBoundingClientRect().top < window.innerHeight - 120) {
+            el.classList.add("show");
+        }
+    });
+});
+
+function openPopup(){
+    document.getElementById("popup").style.display="flex";
+}
+
+function closePopup(){
+    document.getElementById("popup").style.display="none";
+}
+
+function openPopup(role) {
+    document.getElementById("popup").style.display = "flex";
+    document.getElementById("popup-title").innerText = role;
+
+    if(role === "OWNERS") {
+        document.getElementById("popup-text").innerText = " Owner: MC_EDITS | NOTnonX | 4kSk ";
+    }
+    else if(role === "MODERATORS") {
+        document.getElementById("popup-text").innerText = "Moderators: ItzItzNooT(Sr.) | Itz_Airo | thelastw1nter | TAHIR_PLAYZ | Ankit_IsHere(sr.) |  cplexy | Xeltrium_1(S.) | Shadow4ang(Sr.) | Sword2Mace | Sydney7(Sr.) |  WeNeedHype  ";
+    }
+    else if(role === "DEVELOPERS") {
+        document.getElementById("popup-text").innerText = "Developers: Styrixxx | GOLUGAMER | MAYANK | DrFury1  ";
+    }
+    else if(role === "ADMINS") {
+        document.getElementById("popup-text").innerText = "Admins: Chainsaw_op9(jr.) | Zappyx_ | bfet(Sr.) | FluxRegion(Jr.) | Dr1pSp3cter_ ";
+    }
+    else if(role === "HELPERS") {
+        document.getElementById("popup-text").innerText = "Helpers: GRIN0SLAYER | _PSYC0P4TH_ | WARDEN__18 | ProTheStorm_1s | Sohanbhai77";
+    }
+    else if(role === "MANAGERS") {
+        document.getElementById("popup-text").innerText = "Managers: RVP PRO1! | Nephister | IgnoreMyCW(MARKETING TEAM) | Dr1pSp3cter_ | Qff3" ;}  
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+
+</script>
+
+</body>
+</html>
